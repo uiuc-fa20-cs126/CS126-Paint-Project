@@ -22,8 +22,8 @@ class PaintBrush {
   /**
    * Draws a circle on the canvas
    * @param canvas the canvas to draw on
-   * @param x_center x center of the circle
-   * @param y_center y center of the circle
+   * @param x_center x center of the circle in screen space
+   * @param y_center y center of the circle in screen space
    */
   void DrawOnCanvas(Canvas &canvas, double x_center, double y_center) const;
 };

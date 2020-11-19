@@ -55,7 +55,7 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/RGBPixel.cpp src/draw_tools/PaintBrush.cpp)
 list(APPEND SOURCE_FILES ${CORE_SOURCE_FILES} src/PaintApp.cpp)
 
-list(APPEND TEST_FILES tests/TestCanvas.cpp)
+list(APPEND TEST_FILES tests/TestCanvas.cpp tests/TestPaintBrush.cpp)
 
 ci_make_app(
         APP_NAME paint-app
