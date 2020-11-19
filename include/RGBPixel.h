@@ -5,10 +5,12 @@
 #ifndef PAINT_INCLUDE_PIXEL_H_
 #define PAINT_INCLUDE_PIXEL_H_
 
-#endif //PAINT_INCLUDE_PIXEL_H_
 
 #include <cinder/gl/gl.h>
 namespace paint {
+/**
+ * A pixel defined in the RGBA color space
+ */
 class RGBPixel {
   typedef unsigned char byte;
  public:
@@ -18,6 +20,10 @@ class RGBPixel {
   byte alpha_;
 
   RGBPixel(byte red, byte green, byte blue, byte alpha) : red_(red), green_(green), blue_(blue), alpha_(alpha) {}
+  /**
+   * Converts a RGBPixel to cinder::ColorA by packing the RGBA values into an integer
+   * @return a cinder::ColorA object corresponding to this color
+   */
   cinder::ColorA GetCinderColor() const;
   static RGBPixel white() {
     return RGBPixel{255, 255, 255, 255};
@@ -29,3 +35,4 @@ class RGBPixel {
   bool operator!=(RGBPixel const &other) const;
 };
 }
+#endif //PAINT_INCLUDE_PIXEL_H_
