@@ -3,6 +3,7 @@
 //
 #include <PaintApp.h>
 #include <draw_tools/PaintBrush.h>
+#include <draw_tools/PaintBucket.h>
 using namespace cinder;
 namespace paint {
 PaintApp::PaintApp() : canvas_(ci::Rectf(84, 0, 800, 600), 716, 600), toolbar_(ci::Rectf(0, 0, 84, 600)) {
@@ -17,7 +18,7 @@ PaintApp::PaintApp() : canvas_(ci::Rectf(84, 0, 800, 600), 716, 600), toolbar_(c
                                    new PaintBrush(20, ci::ColorAT<unsigned char>::hex(0x00ff00))), "paint_brush_green");
   toolbar_.AddButton(ToolbarButton("assets/paint_brush.png",
                                    new PaintBrush(20, ci::ColorAT<unsigned char>::hex(0x0000ff))), "paint_brush_blue");
-  toolbar_.AddButton(ToolbarButton("assets/paint_bucket.png", new PaintBrush(20, ci::ColorAT<unsigned char>::black())),
+  toolbar_.AddButton(ToolbarButton("assets/paint_bucket.png", new PaintBucket(ci::ColorAT<unsigned char>::black())),
                      "paint_bucket");
 }
 void PaintApp::update() {
