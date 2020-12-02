@@ -5,7 +5,7 @@
 #include <draw_tools/PaintBrush.h>
 using namespace cinder;
 namespace paint {
-PaintApp::PaintApp() : canvas_(ci::Rectf(0, 0, 800, 600), 800, 600) {
+PaintApp::PaintApp() : canvas_(ci::Rectf(0, 0, 800, 600), 800, 600), toolbar_(ci::Rectf(0, 0, 84, 600)) {
   is_painting_ = false;
 }
 void PaintApp::update() {
@@ -15,6 +15,7 @@ void PaintApp::draw() {
   AppBase::draw();
   gl::clear(Color::white());
   canvas_.Draw();
+  toolbar_.Draw();
 }
 void PaintApp::mouseDown(ci::app::MouseEvent event) {
   AppBase::mouseDown(event);

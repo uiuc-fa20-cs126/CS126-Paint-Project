@@ -8,6 +8,7 @@ namespace paint {
 void PaintBrush::DrawOnCanvas(paint::Canvas &canvas, double x_center, double y_center) const {
   glm::u64vec2 canvas_space = canvas.ToCanvasSpace(x_center, y_center);
   int int_radius = radius_;
+  // Create a surface iter over the rectangular area of the circle
   ci::Surface::Iter iter = canvas.GetSurfaceIter(ci::Area(canvas_space - glm::u64vec2(int_radius, int_radius),
                                                           canvas_space + glm::u64vec2(int_radius, int_radius)));
   while (iter.line()) {
