@@ -15,14 +15,16 @@ Canvas::Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height) {
   surface_ = ci::Surface(pixel_width, pixel_height, true);
 }
 
-/**
- * Goes through each row left to right and creates rectangles that expands to cover each pixel in the row of the same color, resetting on color change
- * Done to reduce draw calls
- */
 void Canvas::Draw() const {
   gl::color(Color::white());
   gl::Texture2dRef tex = gl::Texture::create(surface_);
+  float scaling_factor_x = bounds_.getWidth() / GetPixelWidth();
+  float scaling_factor_y = bounds_.getHeight() / GetPixelHeight();
+  gl::pushModelMatrix();
+  gl::scale(scaling_factor_x, scaling_factor_y);
+  gl::translate(bounds_.getUpperLeft());
   gl::draw(tex);
+  gl::popModelMatrix();
 }
 
 ColorAT<unsigned char> Canvas::GetPixel(size_t x, size_t y) const {
@@ -54,7 +56,8 @@ glm::vec2 Canvas::ToScreenSpace(size_t x, size_t y) const {
   return upper_left + vec2(x * scaling_factor_x, y * scaling_factor_y);
 }
 glm::u64vec2 Canvas::ToCanvasSpace(float x, float y) const {
-
+  x -= bounds_.getX1();
+  y -= bounds_.getY1();
   float scaling_factor_x = bounds_.getWidth() / GetPixelWidth();
   float scaling_factor_y = bounds_.getHeight() / GetPixelHeight();
   size_t row = y / scaling_factor_y;

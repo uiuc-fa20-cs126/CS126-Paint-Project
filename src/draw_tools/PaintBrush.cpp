@@ -3,6 +3,7 @@
 //
 
 #include <draw_tools/PaintBrush.h>
+using namespace ci;
 namespace paint {
 
 void PaintBrush::DrawOnCanvas(paint::Canvas &canvas, double x_center, double y_center) const {
@@ -15,7 +16,8 @@ void PaintBrush::DrawOnCanvas(paint::Canvas &canvas, double x_center, double y_c
     while (iter.pixel()) {
       auto x = iter.x();
       auto y = iter.y();
-      if ((x - x_center) * (x - x_center) + (y - y_center) * (y - y_center) <= int_radius * int_radius) {
+      if ((x - canvas_space.x) * (x - canvas_space.x) + (y - canvas_space.y) * (y - canvas_space.y)
+          <= int_radius * int_radius) {
         iter.r() = color_.r;
         iter.g() = color_.g;
         iter.b() = color_.b;
@@ -23,5 +25,9 @@ void PaintBrush::DrawOnCanvas(paint::Canvas &canvas, double x_center, double y_c
       }
     }
   }
+}
+void PaintBrush::DrawButtonOverlay(ci::Rectf bounds) const {
+  gl::color(color_);
+  gl::drawSolidCircle(bounds.getLowerRight() - vec2(5, 5), 5);
 }
 }
