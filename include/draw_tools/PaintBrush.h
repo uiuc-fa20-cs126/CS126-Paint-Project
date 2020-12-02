@@ -5,7 +5,6 @@
 #ifndef PAINT_INCLUDE_DRAW_TOOLS_PAINTBRUSH_H_
 #define PAINT_INCLUDE_DRAW_TOOLS_PAINTBRUSH_H_
 
-#include <RGBPixel.h>
 #include <Canvas.h>
 #include <cinder/gl/gl.h>
 #include <vector>
@@ -16,9 +15,9 @@ namespace paint {
 class PaintBrush {
  private:
   double radius_;
-  RGBPixel color_;
+  ci::ColorAT<unsigned char> color_;
  public:
-  PaintBrush(double radius, RGBPixel const &color) : radius_(radius), color_(color) {}
+  PaintBrush(double radius, ci::ColorAT<unsigned char> const &color) : radius_(radius), color_(color) {}
   /**
    * Draws a circle on the canvas
    * @param canvas the canvas to draw on

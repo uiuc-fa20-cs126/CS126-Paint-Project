@@ -52,7 +52,7 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
-list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/RGBPixel.cpp src/draw_tools/PaintBrush.cpp)
+list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/draw_tools/PaintBrush.cpp)
 list(APPEND SOURCE_FILES ${CORE_SOURCE_FILES} src/PaintApp.cpp)
 
 list(APPEND TEST_FILES tests/TestCanvas.cpp tests/TestPaintBrush.cpp)

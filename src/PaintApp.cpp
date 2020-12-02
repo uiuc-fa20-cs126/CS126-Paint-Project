@@ -23,9 +23,8 @@ void PaintApp::mouseDown(ci::app::MouseEvent event) {
 void PaintApp::mouseMove(ci::app::MouseEvent event) {
   AppBase::mouseMove(event);
   if (is_painting_ && event.getWindow()->getBounds().contains(event.getPos())) {
-    PaintBrush brush(20, RGBPixel::black());
+    PaintBrush brush(20, ci::ColorAT<unsigned char>::black());
     brush.DrawOnCanvas(canvas_, event.getX(), event.getY());
-//    canvas_.SetPixelScreenSpace(event.getX(), event.getY(), RGBPixel::black());
   }
 }
 
