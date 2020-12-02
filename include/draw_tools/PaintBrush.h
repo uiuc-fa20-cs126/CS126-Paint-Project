@@ -8,11 +8,12 @@
 #include <Canvas.h>
 #include <cinder/gl/gl.h>
 #include <vector>
+#include <draw_tools/PaintTool.h>
 namespace paint {
 /**
  * Paintbrush tool, with a configurable radius and color
  */
-class PaintBrush {
+class PaintBrush : public PaintTool {
  private:
   double radius_;
   ci::ColorAT<unsigned char> color_;
@@ -24,7 +25,7 @@ class PaintBrush {
    * @param x_center x center of the circle in screen space
    * @param y_center y center of the circle in screen space
    */
-  void DrawOnCanvas(Canvas &canvas, double x_center, double y_center) const;
+  void DrawOnCanvas(Canvas &canvas, double x_center, double y_center) const override;
 };
 }
 #endif //PAINT_INCLUDE_DRAW_TOOLS_PAINTBRUSH_H_
