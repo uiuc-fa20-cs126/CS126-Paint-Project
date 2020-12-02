@@ -11,7 +11,10 @@ class ToolbarButton {
   ci::gl::Texture2dRef button_image_;
  public:
   ToolbarButton(std::string const &image_path);
-  void Draw(ci::Rectf area) const;
+  void Draw(ci::Rectf const &bounds) const;
+  bool operator<(ToolbarButton const &other) const {
+    return button_image_->getId() < other.button_image_->getId();
+  }
 
 };
 }

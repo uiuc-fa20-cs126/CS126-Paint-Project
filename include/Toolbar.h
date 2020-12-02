@@ -18,6 +18,7 @@ class Toolbar {
  public:
   Toolbar(ci::Rectf bounds) : bounds_(bounds) {}
   void Draw() const;
+  void AddButton(ToolbarButton const &button, PaintTool *tool);
 
 };
 }

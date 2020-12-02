@@ -8,8 +8,8 @@ ToolbarButton::ToolbarButton(std::string const &image_path) {
   auto image_source = ci::loadImage(image_path);
   button_image_ = gl::Texture::create(image_source);
 }
-void ToolbarButton::Draw(ci::Rectf area) const {
+void ToolbarButton::Draw(ci::Rectf const &bounds) const {
   gl::color(Color::white());
-  gl::draw(button_image_, area);
+  gl::draw(button_image_, bounds);
 }
 }

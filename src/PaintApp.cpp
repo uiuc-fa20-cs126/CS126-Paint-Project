@@ -7,6 +7,8 @@ using namespace cinder;
 namespace paint {
 PaintApp::PaintApp() : canvas_(ci::Rectf(0, 0, 800, 600), 800, 600), toolbar_(ci::Rectf(0, 0, 84, 600)) {
   is_painting_ = false;
+  toolbar_.AddButton(ToolbarButton("assets/paint_brush.png"), new PaintBrush(20, ci::ColorAT<unsigned char>::black()));
+  toolbar_.AddButton(ToolbarButton("assets/paint_brush.png"), new PaintBrush(20, ci::ColorAT<unsigned char>::black()));
 }
 void PaintApp::update() {
   AppBase::update();
@@ -24,8 +26,6 @@ void PaintApp::mouseDown(ci::app::MouseEvent event) {
 void PaintApp::mouseMove(ci::app::MouseEvent event) {
   AppBase::mouseMove(event);
   if (is_painting_ && event.getWindow()->getBounds().contains(event.getPos())) {
-    PaintBrush brush(20, ci::ColorAT<unsigned char>::black());
-    brush.DrawOnCanvas(canvas_, event.getX(), event.getY());
   }
 }
 
