@@ -9,7 +9,8 @@ using namespace glm;
 namespace paint {
 
 void PaintBucket::DrawButtonOverlay(ci::Rectf bounds) const {
-
+  ci::gl::color(color_);
+  ci::gl::drawSolidCircle(bounds.getLowerRight() - vec2(5, 5), 5);
 }
 // RGB Color Distance taken from: https://stackoverflow.com/questions/4754506/color-similarity-distance-in-rgba-color-space
 double PaintBucket::ColorDistance(ci::ColorA c1, ci::ColorA c2) const {
@@ -21,6 +22,7 @@ double PaintBucket::ColorDistance(ci::ColorA c1, ci::ColorA c2) const {
 void PaintBucket::MouseDown(Canvas &canvas, vec2 const &position) const {
 
 }
+// BFS Implementation
 void PaintBucket::MouseUp(Canvas &canvas, vec2 const &position) const {
   auto canvas_space = canvas.ToCanvasSpace(position.x, position.y);
   auto start_color = canvas.GetPixelScreenSpace(position.x, position.y);
