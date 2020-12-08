@@ -43,6 +43,5 @@ void PaintBrush::PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) {
   detail_gui->addColorPicker("Brush Color", &color_);
   color_ = temp;
   detail_gui->addSlider("Radius", &radius_, 1.0, 100.0);
-
 }
 }

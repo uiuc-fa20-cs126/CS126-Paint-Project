@@ -4,6 +4,7 @@
 #include <PaintApp.h>
 #include <draw_tools/PaintBrush.h>
 #include <draw_tools/PaintBucket.h>
+#include <draw_tools/ShapeTool.h>
 using namespace cinder;
 namespace paint {
 PaintApp::PaintApp() : canvas_(ci::Rectf(84, 0, 800, 600), 716, 600), toolbar_(ci::Rectf(0, 0, 84, 600)) {
@@ -12,6 +13,7 @@ PaintApp::PaintApp() : canvas_(ci::Rectf(84, 0, 800, 600), 716, 600), toolbar_(c
                      "paint_brush");
   toolbar_.AddButton(ToolbarButton("assets/paint_bucket.png", new PaintBucket(ci::ColorA::black())),
                      "paint_bucket");
+  toolbar_.AddButton(ToolbarButton("assets/shape_tool.png", new ShapeTool(ci::ColorA::black(), 10)), "shape_tool");
 }
 void PaintApp::update() {
   AppBase::update();
@@ -51,7 +53,9 @@ void PaintApp::mouseMove(ci::app::MouseEvent event) {
   }
 }
 void PaintApp::mouseUp(ci::app::MouseEvent event) {
-  if (is_painting_ && event.getWindow()->getBounds().contains(event.getPos())) {
+  if (detail_gui != nullptr && detail_gui->getGlobalBounds().contains(event.getPos())) return;
+  if (toolbar_.GetBounds().contains(event.getPos())) return;
+  if (event.getWindow()->getBounds().contains(event.getPos())) {
     if (toolbar_.IsToolSelected()) {
       toolbar_.GetSelectedButton().GetTool()->MouseUp(canvas_, event.getPos());
     }

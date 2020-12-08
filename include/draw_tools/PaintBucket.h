@@ -11,7 +11,6 @@ namespace paint {
 class PaintBucket : public PaintTool {
  private:
   ci::ColorA color_;
-  double ColorDistance(ci::ColorA c1, ci::ColorA c2) const;
   std::vector<glm::u64vec2> GetAdjacent(glm::u64vec2 const &pos, size_t width, size_t height) const;
  public:
   PaintBucket(ci::ColorA color) : color_(color) {}

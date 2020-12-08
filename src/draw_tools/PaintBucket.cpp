@@ -12,13 +12,6 @@ void PaintBucket::DrawButtonOverlay(ci::Rectf bounds) const {
   ci::gl::color(color_);
   ci::gl::drawSolidCircle(bounds.getLowerRight() - vec2(5, 5), 5);
 }
-// RGB Color Distance taken from: https://stackoverflow.com/questions/4754506/color-similarity-distance-in-rgba-color-space
-double PaintBucket::ColorDistance(ci::ColorA c1, ci::ColorA c2) const {
-  return
-      std::max(pow(c1.r - c2.r, 2), pow(c1.r - c2.r - c1.a + c2.a, 2)) +
-          std::max(pow(c1.g - c2.g, 2), pow(c1.g - c2.g - c1.a + c2.a, 2)) +
-          std::max(pow(c1.b - c2.b, 2), pow(c1.b - c2.b - c1.a + c2.a, 2));
-}
 void PaintBucket::MouseDown(Canvas &canvas, vec2 const &position) const {
 
 }
@@ -40,7 +33,7 @@ void PaintBucket::MouseUp(Canvas &canvas, vec2 const &position) const {
     visited.insert(front.y * canvas.GetPixelWidth() + front.x);
     adjacent = GetAdjacent(front, canvas.GetPixelWidth(), canvas.GetPixelHeight());
     for (auto &adj : adjacent) {
-      double color_distance = ColorDistance(start_color, canvas.GetPixel(adj.x, adj.y));
+      double color_distance = PaintTool::ColorDistance(start_color, canvas.GetPixel(adj.x, adj.y));
       if (visited.count(adj.y * canvas.GetPixelWidth() + adj.x) == 0 && color_distance < 0.05) {
         to_visit.push(adj);
       }
