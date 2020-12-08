@@ -50,5 +50,12 @@ void PaintApp::mouseMove(ci::app::MouseEvent event) {
     }
   }
 }
+void PaintApp::mouseUp(ci::app::MouseEvent event) {
+  if (is_painting_ && event.getWindow()->getBounds().contains(event.getPos())) {
+    if (toolbar_.IsToolSelected()) {
+      toolbar_.GetSelectedButton().GetTool()->MouseUp(canvas_, event.getPos());
+    }
+  }
+}
 
 }

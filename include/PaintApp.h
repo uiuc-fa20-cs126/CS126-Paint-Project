@@ -49,6 +49,11 @@ class PaintApp : public ci::app::App {
    */
   void mouseMove(ci::app::MouseEvent event) override;
 
+  /**
+   * Called on mouse button up
+   */
+  void mouseUp(ci::app::MouseEvent event) override;
+
 };
 }
 #endif //FINAL_PROJECT_PFISTERFACTOR_INCLUDE_PAINTAPP_H_
