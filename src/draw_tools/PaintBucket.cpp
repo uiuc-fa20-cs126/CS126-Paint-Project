@@ -8,9 +8,22 @@ using namespace std;
 using namespace glm;
 namespace paint {
 
-void PaintBucket::DrawOnCanvas(paint::Canvas &canvas, double x_center, double y_center) const {
-  auto canvas_space = canvas.ToCanvasSpace(x_center, y_center);
-  auto start_color = canvas.GetPixelScreenSpace(x_center, y_center);
+void PaintBucket::DrawButtonOverlay(ci::Rectf bounds) const {
+
+}
+// RGB Color Distance taken from: https://stackoverflow.com/questions/4754506/color-similarity-distance-in-rgba-color-space
+double PaintBucket::ColorDistance(ci::ColorA c1, ci::ColorA c2) const {
+  return
+      std::max(pow(c1.r - c2.r, 2), pow(c1.r - c2.r - c1.a + c2.a, 2)) +
+          std::max(pow(c1.g - c2.g, 2), pow(c1.g - c2.g - c1.a + c2.a, 2)) +
+          std::max(pow(c1.b - c2.b, 2), pow(c1.b - c2.b - c1.a + c2.a, 2));
+}
+void PaintBucket::MouseDown(Canvas &canvas, vec2 const &position) const {
+
+}
+void PaintBucket::MouseUp(Canvas &canvas, vec2 const &position) const {
+  auto canvas_space = canvas.ToCanvasSpace(position.x, position.y);
+  auto start_color = canvas.GetPixelScreenSpace(position.x, position.y);
   vector<bool> visited = vector<bool>(canvas.GetPixelWidth() * canvas.GetPixelHeight(), false);
   std::queue<glm::u64vec2> to_visit;
   visited[canvas_space.y * canvas.GetPixelWidth() + canvas_space.x] = true;
@@ -42,14 +55,10 @@ void PaintBucket::DrawOnCanvas(paint::Canvas &canvas, double x_center, double y_
 
   }
 }
-void PaintBucket::DrawButtonOverlay(ci::Rectf bounds) const {
+void PaintBucket::MouseDrag(Canvas &canvas, vec2 const &position) const {
 
 }
-// RGB Color Distance taken from: https://stackoverflow.com/questions/4754506/color-similarity-distance-in-rgba-color-space
-double PaintBucket::ColorDistance(ci::ColorAT<unsigned char> c1, ci::ColorAT<unsigned char> c2) const {
-  return
-      std::max(pow(c1.r - c2.r, 2), pow(c1.r - c2.r - c1.a + c2.a, 2)) +
-          std::max(pow(c1.g - c2.g, 2), pow(c1.g - c2.g - c1.a + c2.a, 2)) +
-          std::max(pow(c1.b - c2.b, 2), pow(c1.b - c2.b - c1.a + c2.a, 2));
+void PaintBucket::PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) {
+
 }
 }

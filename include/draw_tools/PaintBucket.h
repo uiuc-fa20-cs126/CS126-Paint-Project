@@ -6,15 +6,19 @@
 #define PAINT_INCLUDE_DRAW_TOOLS_PAINTBUCKET_H_
 #include <draw_tools/PaintTool.h>
 #include <cinder/gl/gl.h>
+#import "../../blocks/PretzelGUI/src/pretzel/PretzelGui.h"
 namespace paint {
 class PaintBucket : public PaintTool {
  private:
-  ci::ColorAT<unsigned char> color_;
-  double ColorDistance(ci::ColorAT<unsigned char> c1, ci::ColorAT<unsigned char> c2) const;
+  ci::ColorA color_;
+  double ColorDistance(ci::ColorA c1, ci::ColorA c2) const;
  public:
-  PaintBucket(ci::ColorAT<unsigned char> color) : color_(color) {}
-  void DrawOnCanvas(Canvas &canvas, double x_center, double y_center) const override;
+  PaintBucket(ci::ColorA color) : color_(color) {}
   void DrawButtonOverlay(ci::Rectf bounds) const override;
+  void MouseDown(Canvas &canvas, ci::vec2 const &position) const override;
+  void MouseUp(Canvas &canvas, ci::vec2 const &position) const override;
+  void MouseDrag(Canvas &canvas, ci::vec2 const &position) const override;
+  void PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) override;
 };
 }
 #endif //PAINT_INCLUDE_DRAW_TOOLS_PAINTBUCKET_H_

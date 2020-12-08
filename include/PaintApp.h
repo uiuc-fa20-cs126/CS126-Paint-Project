@@ -8,12 +8,14 @@
 #include <cinder/app/App.h>
 #include <Canvas.h>
 #include <Toolbar.h>
+#import "../blocks/PretzelGUI/src/pretzel/PretzelGui.h"
 namespace paint {
 /**
  * Application class for paint
  */
 class PaintApp : public ci::app::App {
  private:
+  pretzel::PretzelGuiRef detail_gui;
   /**
    * The canvas that holds the current picture and any pixels
    */
@@ -46,6 +48,7 @@ class PaintApp : public ci::app::App {
    * Called on mouse movement, inside or outside the window
    */
   void mouseMove(ci::app::MouseEvent event) override;
+
 };
 }
 #endif //FINAL_PROJECT_PFISTERFACTOR_INCLUDE_PAINTAPP_H_

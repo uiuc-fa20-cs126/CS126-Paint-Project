@@ -31,12 +31,12 @@ class Canvas {
    * Gets a pixel in canvas space, i.e. relative to the vector row/column index of the pixel
    *
    */
-  ci::ColorAT<unsigned char> GetPixel(size_t x, size_t y) const;
+  ci::ColorA GetPixel(size_t x, size_t y) const;
   /**
    * Gets a pixel in screen space, i.e. relative to the window
    * Takes the input coordinates (relative to the window) and translates it to an index into the pixel array and grabs the pixel
    */
-  ci::ColorAT<unsigned char> GetPixelScreenSpace(float x, float y) const;
+  ci::ColorA GetPixelScreenSpace(float x, float y) const;
   /**
    * Resets the canvas to all white pixels
    */
@@ -47,14 +47,14 @@ class Canvas {
    * @param y the row of the pixel
    * @param pixel the color to set the pixel
    */
-  void SetPixel(size_t x, size_t y, ci::ColorAT<unsigned char> const &pixel);
+  void SetPixel(size_t x, size_t y, ci::ColorA const &pixel);
   /**
    * Sets an individual pixel in screen space, if it exists within the canvas
    * @param x the x coordinate in screen space
    * @param y the y coordinate in screen space
    * @param pixel the color to set the pixel
    */
-  void SetPixelScreenSpace(float x, float y, ci::ColorAT<unsigned char> const &pixel);
+  void SetPixelScreenSpace(float x, float y, ci::ColorA const &pixel);
   /**
    * Converts a coordinate from screen space to canvas space
    * @param x the x coordinate in screen space

@@ -25,13 +25,18 @@ void Toolbar::Draw() const {
 void Toolbar::AddButton(ToolbarButton const &button, std::string const &name) {
   buttons_.insert(make_pair(name, button));
 }
-void Toolbar::OnClick(glm::ivec2 mouse_pos) {
+void Toolbar::OnClick(glm::ivec2 mouse_pos, pretzel::PretzelGuiRef &detailed_tool_window) {
   for (auto &button : buttons_) {
     if (GetBoundsForTool(button.first).contains(mouse_pos)) {
       if (selected_tool_ == button.first) {
         selected_tool_ = "";
+        detailed_tool_window = nullptr;
       } else {
         selected_tool_ = button.first;
+        detailed_tool_window = pretzel::PretzelGui::create("Tool Settings");
+        detailed_tool_window->setPos(vec2(600, 0));
+        detailed_tool_window->setSize(vec2(100, 100));
+        button.second.GetTool()->PopulateDetailedGUI(detailed_tool_window);
       }
       break;
     }

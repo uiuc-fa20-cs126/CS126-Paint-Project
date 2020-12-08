@@ -27,7 +27,7 @@ void Canvas::Draw() const {
   gl::popModelMatrix();
 }
 
-ColorAT<unsigned char> Canvas::GetPixel(size_t x, size_t y) const {
+ColorA Canvas::GetPixel(size_t x, size_t y) const {
   auto pixel_width = GetPixelWidth();
   auto pixel_height = GetPixelHeight();
   if (x >= pixel_width | y >= pixel_height) {
@@ -35,9 +35,9 @@ ColorAT<unsigned char> Canvas::GetPixel(size_t x, size_t y) const {
         "Coordinates are out of range for canvas of size (" + std::to_string(pixel_width) + ", "
             + std::to_string(pixel_height) + ")");
   }
-  return ColorAT<unsigned char>(surface_.getPixel(vec2(x, y)));
+  return ColorA(surface_.getPixel(vec2(x, y)));
 }
-void Canvas::SetPixel(size_t x, size_t y, ColorAT<unsigned char> const &pixel) {
+void Canvas::SetPixel(size_t x, size_t y, ColorA const &pixel) {
   auto pixel_width = GetPixelWidth();
   auto pixel_height = GetPixelHeight();
   if (x >= pixel_width | y >= pixel_height) {
@@ -45,7 +45,7 @@ void Canvas::SetPixel(size_t x, size_t y, ColorAT<unsigned char> const &pixel) {
   }
   surface_.setPixel(vec2(x, y), pixel);
 }
-void Canvas::SetPixelScreenSpace(float x, float y, ColorAT<unsigned char> const &pixel) {
+void Canvas::SetPixelScreenSpace(float x, float y, ColorA const &pixel) {
   auto canvas_space = ToCanvasSpace(x, y);
   SetPixel(canvas_space.x, canvas_space.y, pixel);
 }
@@ -66,7 +66,7 @@ glm::u64vec2 Canvas::ToCanvasSpace(float x, float y) const {
 }
 void Canvas::Clear() {
 }
-ColorAT<unsigned char> Canvas::GetPixelScreenSpace(float x, float y) const {
+ColorA Canvas::GetPixelScreenSpace(float x, float y) const {
   auto canvas_space = ToCanvasSpace(x, y);
   return GetPixel(canvas_space.x, canvas_space.y);
 }

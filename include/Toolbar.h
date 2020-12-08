@@ -15,14 +15,13 @@ class Toolbar {
  private:
   std::map<std::string, ToolbarButton> buttons_;
   ci::Rectf bounds_;
- private:
   std::string selected_tool_;
   ci::Rectf GetBoundsForTool(std::string const &tool_name) const;
  public:
   Toolbar(ci::Rectf bounds) : bounds_(bounds), selected_tool_("") {}
   void Draw() const;
   void AddButton(ToolbarButton const &button, std::string const &name);
-  void OnClick(glm::ivec2 mouse_pos);
+  void OnClick(glm::ivec2 mouse_pos, pretzel::PretzelGuiRef &detailed_tool_window);
   cinder::Rectf const &GetBounds() const;
   ToolbarButton &GetButton(std::string const &name);
   ToolbarButton &GetSelectedButton();
