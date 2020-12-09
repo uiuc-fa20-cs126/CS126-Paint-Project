@@ -6,7 +6,7 @@
 #define PAINT_INCLUDE_DRAW_TOOLS_PAINTTOOL_H_
 #include <Canvas.h>
 #include <cinder/gl/gl.h>
-#import "../blocks/PretzelGUI/src/pretzel/PretzelGui.h"
+#include "../blocks/PretzelGUI/src/pretzel/PretzelGui.h"
 #include <cmath>
 namespace paint {
 class PaintTool {

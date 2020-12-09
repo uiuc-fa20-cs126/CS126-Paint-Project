@@ -68,8 +68,8 @@ ci_make_app(
 ci_make_app(
         APP_NAME paint-test
         CINDER_PATH ${CINDER_PATH}
-        SOURCES ${CORE_SOURCE_FILES} ${TEST_FILES}
-        INCLUDES include
+        SOURCES ${CORE_SOURCE_FILES} ${TEST_FILES} ${PRETZELGUI_SRC}
+        INCLUDES include blocks/PretzelGUI/src
         LIBRARIES catch2
 )
 

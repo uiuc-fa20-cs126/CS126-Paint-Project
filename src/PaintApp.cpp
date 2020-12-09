@@ -61,5 +61,24 @@ void PaintApp::mouseUp(ci::app::MouseEvent event) {
     }
   }
 }
+void PaintApp::keyDown(ci::app::KeyEvent event) {
+  if (!event.isControlDown() && !event.isMetaDown()) return;
+  switch (event.getChar()) {
+    case 's': {
+      is_painting_ = false;
+      boost::filesystem::path save_path = getSaveFilePath();
+      canvas_.SaveCanvasToFile(save_path);
+      break;
+    }
+    case 'l': {
+
+      break;
+    }
+    default: {
+
+      break;
+    }
+  }
+}
 
 }

@@ -9,8 +9,8 @@ void prepareSettings(paint::PaintApp::Settings *settings) {
   cinder::gl::enableVerticalSync(true);
   settings->setHighDensityDisplayEnabled(true);
   settings->setPowerManagementEnabled(false);
-  settings->setMultiTouchEnabled(true);
   settings->setWindowSize(800, 600);
+  settings->setResizable(false);
   paint::ShapeTool::LoadShapefiles();
 }
 

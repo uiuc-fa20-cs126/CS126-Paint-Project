@@ -65,6 +65,16 @@ glm::u64vec2 Canvas::ToCanvasSpace(float x, float y) const {
   return glm::u64vec2(col, row);
 }
 void Canvas::Clear() {
+  auto iter = surface_.getIter();
+  while (iter.line()) {
+    while (iter.pixel()) {
+      auto white = ColorAT<unsigned char>::white();
+      iter.r() = white.r;
+      iter.g() = white.g;
+      iter.b() = white.b;
+      iter.a() = white.a;
+    }
+  }
 }
 ColorA Canvas::GetPixelScreenSpace(float x, float y) const {
   auto canvas_space = ToCanvasSpace(x, y);
@@ -85,5 +95,23 @@ size_t Canvas::GetPixelHeight() const {
 ci::Surface::Iter Canvas::GetSurfaceIter(Area area) {
   if (area == Area()) area = Area(bounds_);
   return surface_.getIter(area);
+}
+bool Canvas::SaveCanvasToFile(boost::filesystem::path const &p) const {
+  try {
+    gl::FboRef fbo = gl::Fbo::create(GetPixelWidth(), GetPixelHeight());
+    fbo->bindFramebuffer();
+    gl::color(Color::white());
+    gl::draw(gl::Texture2d::create(surface_));
+    fbo->unbindFramebuffer();
+    auto texture = fbo->getColorTexture();
+    std::string path = p.string();
+    if (!p.has_extension()) {
+      path += ".png";
+    }
+    writeImage(path, texture->createSource(), ImageTarget::Options(), "png");
+  } catch (...) {
+    return false;
+  }
+  return true;
 }
 }

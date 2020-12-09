@@ -8,7 +8,7 @@
 #include <cinder/app/App.h>
 #include <Canvas.h>
 #include <Toolbar.h>
-#import "../blocks/PretzelGUI/src/pretzel/PretzelGui.h"
+#include "../blocks/PretzelGUI/src/pretzel/PretzelGui.h"
 namespace paint {
 /**
  * Application class for paint
@@ -53,6 +53,8 @@ class PaintApp : public ci::app::App {
    * Called on mouse button up
    */
   void mouseUp(ci::app::MouseEvent event) override;
+
+  void keyDown(ci::app::KeyEvent event) override;
 
 };
 }
