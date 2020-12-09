@@ -53,7 +53,7 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 file(GLOB_RECURSE PRETZELGUI_SRC blocks/PretzelGUI/*.cpp)
 message(NOTICE ${PRETZELGUI_SRC})
-list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/ToolbarButton.cpp src/draw_tools/PaintBrush.cpp src/draw_tools/PaintBucket.cpp src/draw_tools/ShapeTool.cpp)
+list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/ToolbarButton.cpp src/draw_tools/PaintBrush.cpp src/draw_tools/PaintBucket.cpp src/draw_tools/ShapeTool.cpp src/draw_tools/Eraser.cpp)
 list(APPEND SOURCE_FILES ${CORE_SOURCE_FILES} src/PaintApp.cpp)
 
 list(APPEND TEST_FILES tests/TestCanvas.cpp tests/TestPaintBrush.cpp)

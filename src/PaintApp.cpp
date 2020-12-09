@@ -5,6 +5,7 @@
 #include <draw_tools/PaintBrush.h>
 #include <draw_tools/PaintBucket.h>
 #include <draw_tools/ShapeTool.h>
+#include <draw_tools/Eraser.h>
 using namespace cinder;
 namespace paint {
 PaintApp::PaintApp() : canvas_(ci::Rectf(84, 0, 800, 600), 716, 600), toolbar_(ci::Rectf(0, 0, 84, 600)) {
@@ -14,6 +15,7 @@ PaintApp::PaintApp() : canvas_(ci::Rectf(84, 0, 800, 600), 716, 600), toolbar_(c
   toolbar_.AddButton(ToolbarButton("assets/paint_bucket.png", new PaintBucket(ci::ColorA::black())),
                      "paint_bucket");
   toolbar_.AddButton(ToolbarButton("assets/shape_tool.png", new ShapeTool(ci::ColorA::black(), 10)), "shape_tool");
+  toolbar_.AddButton(ToolbarButton("assets/eraser.png", new Eraser(10)), "eraser");
 }
 void PaintApp::update() {
   AppBase::update();
