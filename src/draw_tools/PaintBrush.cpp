@@ -42,7 +42,7 @@ void PaintBrush::PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) {
   ColorA temp = color_;
   detail_gui->addColorPicker("Brush Color", &color_);
   color_ = temp;
-  detail_gui->addSlider("Radius", &radius_, 1.0, 100.0);
+  detail_gui->addSlider("Radius", &radius_, 1.0, 500.0);
 }
 void PaintBrush::DrawMouseOverlay(vec2 const &position) const {
   gl::color(ColorA::black());

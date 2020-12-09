@@ -35,7 +35,7 @@ void Toolbar::OnClick(glm::ivec2 mouse_pos, pretzel::PretzelGuiRef &detailed_too
         selected_tool_ = button.first;
         detailed_tool_window = pretzel::PretzelGui::create("Tool Settings");
         detailed_tool_window->setPos(vec2(600, 0));
-        detailed_tool_window->setSize(vec2(100, 100));
+        detailed_tool_window->setSize(vec2(100, 250));
         button.second.GetTool()->PopulateDetailedGUI(detailed_tool_window);
       }
       break;
