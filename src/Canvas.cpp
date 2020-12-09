@@ -3,6 +3,7 @@
 //
 #include <Canvas.h>
 #include <exception>
+#include <cinder/ip/Resize.h>
 using namespace cinder;
 
 namespace paint {
@@ -17,6 +18,7 @@ Canvas::Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height) {
     throw std::invalid_argument("Pixel width or height cannot be zero");
   }
   surface_ = ci::Surface(pixel_width, pixel_height, true);
+  Clear();
 }
 
 void Canvas::Draw() const {
@@ -111,6 +113,19 @@ bool Canvas::SaveCanvasToFile(boost::filesystem::path const &p) const {
   } catch (...) {
     return false;
   }
+  return true;
+}
+bool Canvas::LoadCanvasFromFile(boost::filesystem::path const &p) {
+  Surface copy = Surface(GetPixelWidth(), GetPixelHeight(), true);
+  try {
+    auto image = loadImage(p, ImageSource::Options(), "png");
+    SurfaceRef loaded_surface = Surface::create(image);
+    ip::resize(*loaded_surface, &copy);
+
+  } catch (...) {
+    return false;
+  }
+  surface_ = copy;
   return true;
 }
 }

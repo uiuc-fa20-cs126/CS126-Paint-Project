@@ -72,11 +72,15 @@ void PaintApp::keyDown(ci::app::KeyEvent event) {
     case 's': {
       is_painting_ = false;
       boost::filesystem::path save_path = getSaveFilePath();
+      if (save_path.empty()) break;
       canvas_.SaveCanvasToFile(save_path);
       break;
     }
     case 'l': {
-
+      is_painting_ = false;
+      boost::filesystem::path load_path = getOpenFilePath(fs::path(), std::vector<std::string>{"png"});
+      if (load_path.empty()) break;
+      canvas_.LoadCanvasFromFile(load_path);
       break;
     }
     default: {

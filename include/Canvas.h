@@ -29,6 +29,7 @@ class Canvas {
   size_t GetPixelHeight() const;
   ci::Surface::Iter GetSurfaceIter(ci::Area area = ci::Area());
   bool SaveCanvasToFile(boost::filesystem::path const &p) const;
+  bool LoadCanvasFromFile(boost::filesystem::path const &p);
   /**
    * Gets a pixel in canvas space, i.e. relative to the vector row/column index of the pixel
    *
