@@ -4,11 +4,10 @@
 
 #ifndef FINAL_PROJECT_PFISTERFACTOR_INCLUDE_PAINTAPP_H_
 #define FINAL_PROJECT_PFISTERFACTOR_INCLUDE_PAINTAPP_H_
-
-#endif //FINAL_PROJECT_PFISTERFACTOR_INCLUDE_PAINTAPP_H_
 #include <cinder/gl/gl.h>
 #include <cinder/app/App.h>
 #include <Canvas.h>
+#include <Toolbar.h>
 namespace paint {
 /**
  * Application class for paint
@@ -24,6 +23,11 @@ class PaintApp : public ci::app::App {
    * Due to a bug in cinder, I cannot use the mouseDrag event as it doesn't work (atleast on my Mac) unless the mouse moves really slowly
    */
   bool is_painting_;
+
+  /**
+   * The toolbar holding all the tools used for painting
+   */
+  paint::Toolbar toolbar_;
  public:
   PaintApp();
   /**
@@ -44,3 +48,4 @@ class PaintApp : public ci::app::App {
   void mouseMove(ci::app::MouseEvent event) override;
 };
 }
+#endif //FINAL_PROJECT_PFISTERFACTOR_INCLUDE_PAINTAPP_H_
