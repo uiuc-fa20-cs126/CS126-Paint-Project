@@ -34,7 +34,7 @@ void PaintBucket::MouseUp(Canvas &canvas, vec2 const &position) const {
     adjacent = GetAdjacent(front, canvas.GetPixelWidth(), canvas.GetPixelHeight());
     for (auto &adj : adjacent) {
       double color_distance = PaintTool::ColorDistance(start_color, canvas.GetPixel(adj.x, adj.y));
-      if (visited.count(adj.y * canvas.GetPixelWidth() + adj.x) == 0 && color_distance < 0.05) {
+      if (visited.count(adj.y * canvas.GetPixelWidth() + adj.x) == 0 && color_distance < tolerance_) {
         to_visit.push(adj);
       }
     }
@@ -47,6 +47,7 @@ void PaintBucket::PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) {
   ci::ColorA temp = color_;
   detail_gui->addColorPicker("Fill Color", &color_);
   color_ = temp;
+  //detail_gui->addSlider("Tolerance",&tolerance_,0.0,1.0);
 }
 vector<u64vec2> PaintBucket::GetAdjacent(u64vec2 const &pos, size_t width, size_t height) const {
   vector<u64vec2> adjacent;

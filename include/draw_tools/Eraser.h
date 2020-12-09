@@ -6,8 +6,15 @@
 #define PAINT_INCLUDE_DRAW_TOOLS_ERASER_H_
 #include <draw_tools/PaintTool.h>
 namespace paint {
+/**
+ * Eraser tool
+ * Basically a paint brush but with a transparent color
+ */
 class Eraser : public PaintTool {
  private:
+  /**
+   * The radius of the brush circle
+   */
   float radius_;
  public:
   Eraser(float radius) : radius_(radius) {};

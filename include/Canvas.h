@@ -20,19 +20,30 @@ class Canvas {
    * The surface object we draw too
    */
   ci::Surface surface_;
+  /**
+   * The checkerboard texture for the background when nothing is drawn over it
+   */
   static ci::gl::Texture2dRef CHECKERBOARD_TEXTURE;
-  ci::Rectf GetPixelSizedToScreenSpace(size_t x, size_t y) const;
  public:
   Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height);
   cinder::Rectf const &GetBounds() const;
   size_t GetPixelWidth() const;
   size_t GetPixelHeight() const;
   ci::Surface::Iter GetSurfaceIter(ci::Area area = ci::Area());
+  /**
+   * Saves the image drawn on the canvas to file
+   * @param p the file path to save too
+   * @return a boolean indicating success or failure
+   */
   bool SaveCanvasToFile(boost::filesystem::path const &p) const;
+  /**
+   * Loads an image from file onto the canvas
+   * @param p the file path to load from
+   * @return a boolean indicating success or failure
+   */
   bool LoadCanvasFromFile(boost::filesystem::path const &p);
   /**
    * Gets a pixel in canvas space, i.e. relative to the vector row/column index of the pixel
-   *
    */
   ci::ColorA GetPixel(size_t x, size_t y) const;
   /**

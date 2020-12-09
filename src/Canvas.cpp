@@ -81,9 +81,6 @@ ColorA Canvas::GetPixelScreenSpace(float x, float y) const {
   auto canvas_space = ToCanvasSpace(x, y);
   return GetPixel(canvas_space.x, canvas_space.y);
 }
-ci::Rectf Canvas::GetPixelSizedToScreenSpace(size_t x, size_t y) const {
-  return cinder::Rectf(ToScreenSpace(x, y), ToScreenSpace(x + 1, y + 1));
-}
 Rectf const &Canvas::GetBounds() const {
   return bounds_;
 }

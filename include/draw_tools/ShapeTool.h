@@ -9,8 +9,14 @@
 #include <cinder/Color.h>
 #include "../../../../../../../../../../../Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/_types/_size_t.h"
 namespace paint {
+/**
+ * Draws a shape to the screen
+ */
 class ShapeTool : public PaintTool {
  public:
+  /**
+   * The type of shapes we can draw
+   */
   enum ShapeType {
     HEART,
     STAR
@@ -22,6 +28,9 @@ class ShapeTool : public PaintTool {
   void DrawMouseOverlay(ci::vec2 const &position) const override;
   void DrawButtonOverlay(ci::Rectf bounds) const override;
   void PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) override;
+  /**
+   * Loads the shape files into static textures
+   */
   static void LoadShapefiles();
   ShapeType GetSelectedShape() const {
     return selected_shape_;
@@ -42,12 +51,27 @@ class ShapeTool : public PaintTool {
     size_ = size;
   }
  private:
+  /**
+   * The current shape to paint
+   */
   ShapeType selected_shape_;
+  /**
+   * The color of the filled shape
+   */
   ci::ColorA color_;
  private:
   size_t size_;
+  /**
+   * The star shape texture
+   */
   static ci::SurfaceRef STAR_SHAPE;
+  /**
+   * The heart shape texture
+   */
   static ci::SurfaceRef HEART_SHAPE;
+  /**
+   * Names of the shapes to display on the tool window selection
+   */
   static std::vector<std::string> SHAPE_NAMES;
 };
 }

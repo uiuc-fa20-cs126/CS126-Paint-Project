@@ -15,6 +15,9 @@ namespace paint {
  */
 class PaintApp : public ci::app::App {
  private:
+  /**
+   * The tool details gui window that floats over the canvas
+   */
   pretzel::PretzelGuiRef detail_gui;
   /**
    * The canvas that holds the current picture and any pixels
@@ -25,7 +28,6 @@ class PaintApp : public ci::app::App {
    * Due to a bug in cinder, I cannot use the mouseDrag event as it doesn't work (atleast on my Mac) unless the mouse moves really slowly
    */
   bool is_painting_;
-
   /**
    * The toolbar holding all the tools used for painting
    */
@@ -54,6 +56,9 @@ class PaintApp : public ci::app::App {
    */
   void mouseUp(ci::app::MouseEvent event) override;
 
+  /**
+   * Called on a keyboard button down
+   */
   void keyDown(ci::app::KeyEvent event) override;
 
 };
