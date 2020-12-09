@@ -22,20 +22,8 @@ Canvas::Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height) {
 void Canvas::Draw() const {
   gl::color(Color::white());
   gl::Texture2dRef tex = gl::Texture::create(surface_);
-  float scaling_factor_x = bounds_.getWidth() / GetPixelWidth();
-  float scaling_factor_y = bounds_.getHeight() / GetPixelHeight();
-  float checkerboard_scaling_x = bounds_.getWidth() / CHECKERBOARD_TEXTURE->getWidth();
-  float checkerboard_scaling_y = bounds_.getHeight() / CHECKERBOARD_TEXTURE->getHeight();
-  gl::pushModelMatrix();
-  gl::translate(bounds_.getUpperLeft());
-  gl::scale(checkerboard_scaling_x, checkerboard_scaling_y);
-  gl::draw(CHECKERBOARD_TEXTURE);
-  gl::popModelMatrix();
-  gl::pushModelMatrix();
-  gl::translate(bounds_.getUpperLeft());
-  gl::scale(scaling_factor_x, scaling_factor_y);
-  gl::draw(tex);
-  gl::popModelMatrix();
+  gl::draw(CHECKERBOARD_TEXTURE, bounds_);
+  gl::draw(tex, bounds_);
 }
 
 ColorA Canvas::GetPixel(size_t x, size_t y) const {
