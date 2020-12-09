@@ -44,4 +44,8 @@ void PaintBrush::PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) {
   color_ = temp;
   detail_gui->addSlider("Radius", &radius_, 1.0, 100.0);
 }
+void PaintBrush::DrawMouseOverlay(vec2 const &position) const {
+  gl::color(ColorA::black());
+  gl::drawStrokedCircle(position, radius_);
+}
 }

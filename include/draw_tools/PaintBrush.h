@@ -31,6 +31,7 @@ class PaintBrush : public PaintTool {
   void SetColor(ci::ColorA const &color) {
     color_ = color;
   }
+  void DrawMouseOverlay(ci::vec2 const &position) const override;
   /**
    * Draws a circle on the canvas
    * @param canvas the canvas to draw on

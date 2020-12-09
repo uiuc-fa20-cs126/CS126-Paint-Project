@@ -57,4 +57,14 @@ void ShapeTool::LoadShapefiles() {
   ShapeTool::HEART_SHAPE = Surface::create(loadImage("assets/shape_tool/heart.png"));
   ShapeTool::STAR_SHAPE = Surface::create(loadImage("assets/shape_tool/star.png"));
 }
+void ShapeTool::DrawMouseOverlay(vec2 const &position) const {
+  SurfaceRef shape_surface = (selected_shape_ == ShapeType::HEART) ? ShapeTool::HEART_SHAPE : ShapeTool::STAR_SHAPE;
+  gl::Texture2dRef shape = gl::Texture2d::create(*shape_surface);
+  auto bounds = Rectf(position.x - size_ / 2,
+                      position.y - size_ / 2,
+                      position.x + size_ / 2,
+                      position.y + size_ / 2);
+  gl::color(ColorA::white());
+  gl::draw(shape, bounds);
+}
 }

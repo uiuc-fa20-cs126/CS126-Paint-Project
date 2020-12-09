@@ -24,6 +24,9 @@ void PaintApp::draw() {
   AppBase::draw();
   gl::clear(Color::white());
   canvas_.Draw();
+  if (toolbar_.IsToolSelected()) {
+    toolbar_.GetSelectedButton().GetTool()->DrawMouseOverlay(this->getWindow()->getMousePos());
+  }
   toolbar_.Draw();
   if (detail_gui != nullptr) detail_gui->draw();
 }

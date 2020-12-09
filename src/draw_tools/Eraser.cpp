@@ -2,7 +2,7 @@
 // Created by Eric Pfister on 12/8/20.
 //
 #include <draw_tools/Eraser.h>
-
+using namespace ci;
 namespace paint {
 
 void Eraser::MouseDown(Canvas &canvas, glm::vec2 const &position) const {
@@ -38,5 +38,9 @@ void Eraser::DrawButtonOverlay(ci::Rectf bounds) const {
 void Eraser::PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) {
   detail_gui->addSlider("Radius", &radius_, 1.0, 500);
 
+}
+void Eraser::DrawMouseOverlay(glm::vec2 const &position) const {
+  gl::color(ColorA::black());
+  gl::drawStrokedCircle(position, radius_);
 }
 }

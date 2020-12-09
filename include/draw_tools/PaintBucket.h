@@ -14,6 +14,7 @@ class PaintBucket : public PaintTool {
   std::vector<glm::u64vec2> GetAdjacent(glm::u64vec2 const &pos, size_t width, size_t height) const;
  public:
   PaintBucket(ci::ColorA color) : color_(color) {}
+  void DrawMouseOverlay(ci::vec2 const &position) const override;
   void DrawButtonOverlay(ci::Rectf bounds) const override;
   void MouseDown(Canvas &canvas, ci::vec2 const &position) const override;
   void MouseUp(Canvas &canvas, ci::vec2 const &position) const override;

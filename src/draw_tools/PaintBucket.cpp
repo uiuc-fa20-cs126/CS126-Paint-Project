@@ -64,4 +64,7 @@ vector<u64vec2> PaintBucket::GetAdjacent(u64vec2 const &pos, size_t width, size_
   }
   return adjacent;
 }
+void PaintBucket::DrawMouseOverlay(vec2 const &position) const {
+
+}
 }

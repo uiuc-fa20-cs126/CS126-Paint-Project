@@ -19,6 +19,7 @@ class ShapeTool : public PaintTool {
   void MouseDown(Canvas &canvas, glm::vec2 const &position) const override;
   void MouseUp(Canvas &canvas, glm::vec2 const &position) const override;
   void MouseDrag(Canvas &canvas, glm::vec2 const &position) const override;
+  void DrawMouseOverlay(ci::vec2 const &position) const override;
   void DrawButtonOverlay(ci::Rectf bounds) const override;
   void PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) override;
   static void LoadShapefiles();

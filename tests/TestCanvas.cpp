@@ -7,10 +7,11 @@
 #include <catch2/catch.hpp>
 #include <cinder/gl/gl.h>
 using namespace paint;
+using namespace cinder;
 Canvas canvas = Canvas(ci::Rectf(0, 0, 800, 600), 20, 15);
-RGBPixel red = RGBPixel(255, 0, 0, 255);
-RGBPixel blue = RGBPixel(0, 255, 0, 255);
-RGBPixel green = RGBPixel(0, 0, 255, 255);
+ColorA red = ColorA(1, 0, 0, 1);
+ColorA blue = ColorA(0, 1, 0, 1);
+ColorA green = ColorA(0, 0, 1, 1);
 TEST_CASE("Converting between canvas and screen space") {
   // Convert to screen space
   auto screen_space_1 = canvas.ToScreenSpace(0, 0);
@@ -28,9 +29,9 @@ TEST_CASE("Converting between canvas and screen space") {
 TEST_CASE("Setting a pixel") {
   SECTION("Canvas space") {
     canvas.Clear();
-    REQUIRE(canvas.GetPixel(0, 0) == RGBPixel::white());
-    REQUIRE(canvas.GetPixel(10, 7) == RGBPixel::white());
-    REQUIRE(canvas.GetPixel(19, 14) == RGBPixel::white());
+    REQUIRE(canvas.GetPixel(0, 0) == ColorA::white());
+    REQUIRE(canvas.GetPixel(10, 7) == ColorA::white());
+    REQUIRE(canvas.GetPixel(19, 14) == ColorA::white());
     canvas.SetPixel(0, 0, red);
     canvas.SetPixel(10, 7, green);
     canvas.SetPixel(19, 14, blue);
@@ -39,12 +40,12 @@ TEST_CASE("Setting a pixel") {
     REQUIRE(canvas.GetPixel(19, 14) == blue);
   }SECTION("Screen space") {
     canvas.Clear();
-    REQUIRE(canvas.GetPixelScreenSpace(0, 0) == RGBPixel::white());
-    REQUIRE(canvas.GetPixelScreenSpace(400, 300) == RGBPixel::white());
-    REQUIRE(canvas.GetPixelScreenSpace(799, 599) == RGBPixel::white());
-    REQUIRE(canvas.GetPixel(0, 0) == RGBPixel::white());
-    REQUIRE(canvas.GetPixel(10, 7) == RGBPixel::white());
-    REQUIRE(canvas.GetPixel(19, 14) == RGBPixel::white());
+    REQUIRE(canvas.GetPixelScreenSpace(0, 0) == ColorA::white());
+    REQUIRE(canvas.GetPixelScreenSpace(400, 300) == ColorA::white());
+    REQUIRE(canvas.GetPixelScreenSpace(799, 599) == ColorA::white());
+    REQUIRE(canvas.GetPixel(0, 0) == ColorA::white());
+    REQUIRE(canvas.GetPixel(10, 7) == ColorA::white());
+    REQUIRE(canvas.GetPixel(19, 14) == ColorA::white());
     canvas.SetPixelScreenSpace(0, 0, red);
     canvas.SetPixelScreenSpace(400, 300, green);
     canvas.SetPixelScreenSpace(799, 599, blue);

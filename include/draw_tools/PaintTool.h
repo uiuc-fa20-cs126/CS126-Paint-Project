@@ -15,6 +15,7 @@ class PaintTool {
   virtual void MouseUp(Canvas &canvas, ci::vec2 const &position) const = 0;
   virtual void MouseDrag(Canvas &canvas, ci::vec2 const &position) const = 0;
   virtual void DrawButtonOverlay(ci::Rectf bounds) const = 0;
+  virtual void DrawMouseOverlay(ci::vec2 const &position) const = 0;
   virtual void PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) = 0;
   virtual ~PaintTool() {}
   // RGB Color Distance taken from: https://stackoverflow.com/questions/4754506/color-similarity-distance-in-rgba-color-space
