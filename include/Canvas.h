@@ -20,6 +20,7 @@ class Canvas {
    * The surface object we draw too
    */
   ci::Surface surface_;
+  static ci::gl::Texture2dRef CHECKERBOARD_TEXTURE;
   ci::Rectf GetPixelSizedToScreenSpace(size_t x, size_t y) const;
  public:
   Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height);

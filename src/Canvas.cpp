@@ -7,7 +7,11 @@ using namespace cinder;
 
 namespace paint {
 
+gl::Texture2dRef Canvas::CHECKERBOARD_TEXTURE;
 Canvas::Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height) {
+  if (CHECKERBOARD_TEXTURE == nullptr) {
+    CHECKERBOARD_TEXTURE = gl::Texture2d::create(loadImage("assets/checkerboard_pattern.png"));
+  }
   bounds_ = bounds;
   if (pixel_width == 0 | pixel_height == 0) {
     throw std::invalid_argument("Pixel width or height cannot be zero");
@@ -20,9 +24,16 @@ void Canvas::Draw() const {
   gl::Texture2dRef tex = gl::Texture::create(surface_);
   float scaling_factor_x = bounds_.getWidth() / GetPixelWidth();
   float scaling_factor_y = bounds_.getHeight() / GetPixelHeight();
+  float checkerboard_scaling_x = bounds_.getWidth() / CHECKERBOARD_TEXTURE->getWidth();
+  float checkerboard_scaling_y = bounds_.getHeight() / CHECKERBOARD_TEXTURE->getHeight();
   gl::pushModelMatrix();
-  gl::scale(scaling_factor_x, scaling_factor_y);
   gl::translate(bounds_.getUpperLeft());
+  gl::scale(checkerboard_scaling_x, checkerboard_scaling_y);
+  gl::draw(CHECKERBOARD_TEXTURE);
+  gl::popModelMatrix();
+  gl::pushModelMatrix();
+  gl::translate(bounds_.getUpperLeft());
+  gl::scale(scaling_factor_x, scaling_factor_y);
   gl::draw(tex);
   gl::popModelMatrix();
 }
@@ -72,7 +83,7 @@ void Canvas::Clear() {
       iter.r() = white.r;
       iter.g() = white.g;
       iter.b() = white.b;
-      iter.a() = white.a;
+      iter.a() = 0;
     }
   }
 }
