@@ -20,7 +20,10 @@ class Canvas {
    * The surface object we draw too
    */
   ci::Surface surface_;
-  ci::Rectf GetPixelSizedToScreenSpace(size_t x, size_t y) const;
+  /**
+   * The checkerboard texture for the background when nothing is drawn over it
+   */
+  static ci::gl::Texture2dRef CHECKERBOARD_TEXTURE;
  public:
   Canvas(ci::Rectf bounds, size_t pixel_width, size_t pixel_height);
   cinder::Rectf const &GetBounds() const;
@@ -28,15 +31,26 @@ class Canvas {
   size_t GetPixelHeight() const;
   ci::Surface::Iter GetSurfaceIter(ci::Area area = ci::Area());
   /**
-   * Gets a pixel in canvas space, i.e. relative to the vector row/column index of the pixel
-   *
+   * Saves the image drawn on the canvas to file
+   * @param p the file path to save too
+   * @return a boolean indicating success or failure
    */
-  ci::ColorAT<unsigned char> GetPixel(size_t x, size_t y) const;
+  bool SaveCanvasToFile(boost::filesystem::path const &p) const;
+  /**
+   * Loads an image from file onto the canvas
+   * @param p the file path to load from
+   * @return a boolean indicating success or failure
+   */
+  bool LoadCanvasFromFile(boost::filesystem::path const &p);
+  /**
+   * Gets a pixel in canvas space, i.e. relative to the vector row/column index of the pixel
+   */
+  ci::ColorA GetPixel(size_t x, size_t y) const;
   /**
    * Gets a pixel in screen space, i.e. relative to the window
    * Takes the input coordinates (relative to the window) and translates it to an index into the pixel array and grabs the pixel
    */
-  ci::ColorAT<unsigned char> GetPixelScreenSpace(float x, float y) const;
+  ci::ColorA GetPixelScreenSpace(float x, float y) const;
   /**
    * Resets the canvas to all white pixels
    */
@@ -47,14 +61,14 @@ class Canvas {
    * @param y the row of the pixel
    * @param pixel the color to set the pixel
    */
-  void SetPixel(size_t x, size_t y, ci::ColorAT<unsigned char> const &pixel);
+  void SetPixel(size_t x, size_t y, ci::ColorA const &pixel);
   /**
    * Sets an individual pixel in screen space, if it exists within the canvas
    * @param x the x coordinate in screen space
    * @param y the y coordinate in screen space
    * @param pixel the color to set the pixel
    */
-  void SetPixelScreenSpace(float x, float y, ci::ColorAT<unsigned char> const &pixel);
+  void SetPixelScreenSpace(float x, float y, ci::ColorA const &pixel);
   /**
    * Converts a coordinate from screen space to canvas space
    * @param x the x coordinate in screen space

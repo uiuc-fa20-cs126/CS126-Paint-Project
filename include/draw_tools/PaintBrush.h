@@ -15,30 +15,43 @@ namespace paint {
  */
 class PaintBrush : public PaintTool {
  private:
-  double radius_;
-  ci::ColorAT<unsigned char> color_;
+  float radius_;
+  ci::ColorA color_;
  public:
-  PaintBrush(double radius, ci::ColorAT<unsigned char> const &color) : radius_(radius), color_(color) {}
-  double GetRadius() const {
+  PaintBrush(float radius, ci::ColorA const &color) : radius_(radius), color_(color) {}
+  float GetRadius() const {
     return radius_;
   }
-  void SetRadius(double radius) {
+  void SetRadius(float radius) {
     radius_ = radius;
   }
-  ci::ColorAT<unsigned char> const &GetColor() const {
+  ci::ColorA const &GetColor() const {
     return color_;
   }
-  void SetColor(ci::ColorAT<unsigned char> const &color) {
+  void SetColor(ci::ColorA const &color) {
     color_ = color;
   }
+  void DrawMouseOverlay(ci::vec2 const &position) const override;
   /**
    * Draws a circle on the canvas
    * @param canvas the canvas to draw on
    * @param x_center x center of the circle in screen space
    * @param y_center y center of the circle in screen space
    */
-  void DrawOnCanvas(Canvas &canvas, double x_center, double y_center) const override;
+  void MouseDown(Canvas &canvas, ci::vec2 const &position) const override;
+  /**
+   * Does nothing for brush tool
+   */
+  void MouseUp(Canvas &canvas, ci::vec2 const &position) const override;
+  /**
+   * Draws a circle on the canvas
+   * @param canvas the canvas to draw on
+   * @param x_center x center of the circle in screen space
+   * @param y_center y center of the circle in screen space
+   */
+  void MouseDrag(Canvas &canvas, ci::vec2 const &position) const override;
   void DrawButtonOverlay(ci::Rectf bounds) const override;
+  void PopulateDetailedGUI(pretzel::PretzelGuiRef &detail_gui) override;
 };
 }
 #endif //PAINT_INCLUDE_DRAW_TOOLS_PAINTBRUSH_H_

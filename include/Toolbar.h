@@ -13,16 +13,42 @@
 namespace paint {
 class Toolbar {
  private:
+  /**
+   * A map between button names and their object
+   */
   std::map<std::string, ToolbarButton> buttons_;
+  /**
+   * The boundaries of the toolbar on the screen
+   */
   ci::Rectf bounds_;
- private:
+  /**
+   * The currently selected tool on the toolbar
+   * Empty if no selected tool
+   */
   std::string selected_tool_;
+  /**
+   * Returns the boundaries for a tool button icon on the toolbar
+   * @param tool_name the tool whose boundaries we wish to find
+   */
   ci::Rectf GetBoundsForTool(std::string const &tool_name) const;
  public:
   Toolbar(ci::Rectf bounds) : bounds_(bounds), selected_tool_("") {}
+  /**
+   * Draws the toolbar to the screen
+   */
   void Draw() const;
+  /**
+   * Adds a button to the toolbar
+   * @param button the toolbar button object
+   * @param name the name of the tool
+   */
   void AddButton(ToolbarButton const &button, std::string const &name);
-  void OnClick(glm::ivec2 mouse_pos);
+  /**
+   * Called when the user clicks on the toolbar
+   * @param mouse_pos the position of the mouse
+   * @param detailed_tool_window a reference to the detailed tool gui window
+   */
+  void OnClick(glm::ivec2 mouse_pos, pretzel::PretzelGuiRef &detailed_tool_window);
   cinder::Rectf const &GetBounds() const;
   ToolbarButton &GetButton(std::string const &name);
   ToolbarButton &GetSelectedButton();

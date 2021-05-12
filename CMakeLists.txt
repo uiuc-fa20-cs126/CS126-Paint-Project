@@ -22,7 +22,7 @@ if (MSVC)
     add_compile_options(/W3 /WX)
 else ()
     # lots of warnings and all warnings as errors
-    add_compile_options(-Wall -Wpedantic -Werror)
+    add_compile_options(-Wall -Wpedantic -Werror -Wno-reorder -Wno-import-preprocessor-directive-pedantic -Wno-delete-non-abstract-non-virtual-dtor)
 endif ()
 
 # FetchContent added in CMake 3.11, downloads during the configure step
@@ -51,8 +51,9 @@ get_filename_component(CINDER_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../" ABSOLUTE
 get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
-
-list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/ToolbarButton.cpp src/draw_tools/PaintBrush.cpp src/draw_tools/PaintBucket.cpp)
+file(GLOB_RECURSE PRETZELGUI_SRC blocks/PretzelGUI/*.cpp)
+message(NOTICE ${PRETZELGUI_SRC})
+list(APPEND CORE_SOURCE_FILES src/Canvas.cpp src/Toolbar.cpp src/ToolbarButton.cpp src/draw_tools/PaintBrush.cpp src/draw_tools/PaintBucket.cpp src/draw_tools/ShapeTool.cpp src/draw_tools/Eraser.cpp)
 list(APPEND SOURCE_FILES ${CORE_SOURCE_FILES} src/PaintApp.cpp)
 
 list(APPEND TEST_FILES tests/TestCanvas.cpp tests/TestPaintBrush.cpp)
@@ -60,15 +61,15 @@ list(APPEND TEST_FILES tests/TestCanvas.cpp tests/TestPaintBrush.cpp)
 ci_make_app(
         APP_NAME paint-app
         CINDER_PATH ${CINDER_PATH}
-        SOURCES apps/cinder_app_main.cc ${SOURCE_FILES}
-        INCLUDES include
+        SOURCES apps/cinder_app_main.cc ${SOURCE_FILES} ${PRETZELGUI_SRC}
+        INCLUDES include blocks/PretzelGUI/src
 )
 
 ci_make_app(
         APP_NAME paint-test
         CINDER_PATH ${CINDER_PATH}
-        SOURCES ${CORE_SOURCE_FILES} ${TEST_FILES}
-        INCLUDES include
+        SOURCES ${CORE_SOURCE_FILES} ${TEST_FILES} ${PRETZELGUI_SRC}
+        INCLUDES include blocks/PretzelGUI/src
         LIBRARIES catch2
 )
 
